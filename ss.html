@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photography Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@200;300;400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=EB+Garamond:ital,wght@0,400;1,400&family=Oswald:wght@300;400;600&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Raleway', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     SECTION 1: YAZZEN CAROUSEL
+  ═══════════════════════════════════════════════════════════ */
+
+  :root {
+    --white: #ffffff;
+    --silver: rgba(255,255,255,0.55);
+    --slide-duration: 5000ms;
+    --fade-duration: 900ms;
+  }
+
+  /* ── CAROUSEL WRAPPER ── */
+  .carousel {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #111;
+  }
+
+  /* ── SLIDES (background images) ── */
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    will-change: opacity;
+  }
+  .slide.active { opacity: 1; }
+
+  .slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.52) grayscale(100%);
+    transform: scale(1.04);
+    transition: transform 6s ease;
+  }
+  .slide.active .slide-img { transform: scale(1); }
+
+  /* Dark gradient overlay */
+  .slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(0,0,0,0.55) 0%,
+      rgba(0,0,0,0.15) 50%,
+      rgba(0,0,0,0.30) 100%
+    );
+  }
+
+  /* ── STATIC LEFT CONTENT ── */
+  .static-left {
+    position: absolute;
+    left: 40px;
+    bottom: 160px;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .static-left .capturing {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(72px, 8vw, 110px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -1px;
+  }
+
+  .static-left .tagline {
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    color: var(--silver);
+    margin-top: 28px;
+    text-transform: uppercase;
+  }
+
+  .static-left .category {
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    color: var(--silver);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* ── ANIMATED RIGHT TEXT ── */
+  .right-text {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    text-align: right;
+    pointer-events: none;
+    max-width: 65vw;
+  }
+
+  .slide-label {
+    font-family: 'Raleway', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.28em;
+    color: var(--silver);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity var(--fade-duration) ease,
+      transform var(--fade-duration) ease;
+  }
+
+  .slide-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(60px, 9vw, 130px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 0.9;
+    letter-spacing: -2px;
+
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity var(--fade-duration) ease 0.12s,
+      transform var(--fade-duration) ease 0.12s;
+  }
+
+  /* Active state: text slides in */
+  .right-text.text-visible .slide-label,
+  .right-text.text-visible .slide-title {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Exit: text slides out upward */
+  .right-text.text-exit .slide-label,
+  .right-text.text-exit .slide-title {
+    opacity: 0;
+    transform: translateY(-16px);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
+
+  /* Thin horizontal rule accent */
+  .rule {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1px;
+    height: 120px;
+    background: rgba(255,255,255,0.25);
+    z-index: 10;
+  }
+
+  /* ── PROGRESS DOTS ── */
+  .dots {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .dot {
+    position: relative;
+    width: 220px;
+    height: 1px;
+    background: rgba(255,255,255,0.2);
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .dot-fill {
+    position: absolute;
+    left: 0; top: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--white);
+    transition: width 0.3s ease;
+  }
+
+  .dot.active .dot-fill {
+    animation: fillBar var(--slide-duration) linear forwards;
+  }
+
+  @keyframes fillBar {
+    from { width: 0% }
+    to   { width: 100% }
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     SECTION 2: CHRISTINA HOHNER
+  ═══════════════════════════════════════════════════════════ */
+
+  .christina-section {
+    background: #fff;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 28px 40px;
+  }
+
+  .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    color: #111;
+    text-transform: uppercase;
+  }
+
+  .hamburger {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+  .hamburger span {
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: #111;
+  }
+
+  /* ── LAYOUT SECTION ── */
+  .layout-section {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 90px);
+    padding: 20px 0 40px 0;
+  }
+
+  /* ── LAYOUT GRID ── */
+  .layout {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ────────────────────────────────────────────
+     LEFT CLUSTER
+  ──────────────────────────────────────────── */
+
+  /* Large rotating image – bottom left */
+  .img-large {
+    position: absolute;
+    left: 20px;
+    bottom: 0;
+    width: 300px;
+    height: 490px;
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  .img-large img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  .img-large img.visible { opacity: 1; }
+
+  /* WEDDING text – overlaps top-left of large image */
+  .text-wedding {
+    position: absolute;
+    left: 60px;
+    top: 60px;
+    z-index: 5;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 900;
+    font-size: clamp(52px, 5.5vw, 82px);
+    color: #111;
+    letter-spacing: -1px;
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  /* Tall portrait – overlaps right side of large image */
+  .img-tall {
+    position: absolute;
+    left: 240px;
+    top: 20px;
+    width: 230px;
+    height: 400px;
+    object-fit: cover;
+    z-index: 4;
+  }
+
+  /* "Photography" big text at bottom */
+  .text-photography {
+    position: absolute;
+    left: 220px;
+    bottom: -10px;
+    z-index: 6;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(70px, 8vw, 118px);
+    font-weight: 900;
+    color: #111;
+    letter-spacing: -3px;
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  /* ────────────────────────────────────────────
+     RIGHT CLUSTER
+  ──────────────────────────────────────────── */
+
+  /* Studio portrait */
+  .img-studio {
+    position: absolute;
+    right: 360px;
+    top: 0;
+    width: 270px;
+    height: 380px;
+    object-fit: cover;
+    z-index: 2;
+  }
+
+  /* BRANDING text – right of studio image */
+  .text-branding {
+    position: absolute;
+    right: 20px;
+    top: 180px;
+    z-index: 5;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 900;
+    font-size: clamp(52px, 5.5vw, 82px);
+    color: #111;
+    letter-spacing: -1px;
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  /* Motion veil image – bottom right */
+  .img-veil {
+    position: absolute;
+    right: 20px;
+    bottom: 60px;
+    width: 260px;
+    height: 310px;
+    object-fit: cover;
+    object-position: center top;
+    z-index: 3;
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+     SECTION 3: VISUAL STORIES
+  ═══════════════════════════════════════════════════════════ */
+
+  .hero-section {
+    background: #f5f7fa;
+    min-height: 100vh;
+    padding: 80px 40px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── HEADING ── */
+  .heading {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 300;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 80px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── PHOTO STACK CONTAINER ── */
+  .photo-container {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    height: 420px;
+    margin-bottom: 80px;
+    perspective: 1200px;
+  }
+
+  /* ── PHOTO CARDS ── */
+  .photo-card {
+    position: absolute;
+    width: 320px;
+    height: 420px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    background: #fff;
+  }
+
+  .photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Static stacked positions */
+  .photo-card:nth-child(1) {
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%) translateX(-35px) rotate(-8deg);
+    z-index: 1;
+  }
+
+  .photo-card:nth-child(2) {
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%) rotate(2deg);
+    z-index: 3;
+  }
+
+  .photo-card:nth-child(3) {
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%) translateX(35px) rotate(8deg);
+    z-index: 2;
+  }
+
+  /* ── BIO TEXT ── */
+  .bio-text {
+    max-width: 820px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: clamp(16px, 1.8vw, 20px);
+    font-weight: 400;
+    line-height: 1.8;
+    color: #2d2d2d;
+    text-align: center;
+  }
+
+/* ── SECTION ── */
+  .ethnos-section {
+    min-height: 100vh;
+    padding: 60px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── CONTAINER ── */
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 0.8fr;
+    gap: 60px;
+    max-width: 1400px;
+    width: 100%;
+    align-items: center;
+  }
+
+  /* ── LEFT IMAGE ── */
+  .left-image {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    justify-self: end;
+  }
+
+  .left-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(100%);
+  }
+
+  /* Diagonal text overlay on image */
+  .image-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-8deg);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    color: rgba(255,255,255,0.9);
+    text-transform: uppercase;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  /* ── CENTER CONTENT ── */
+  .center-content {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    color: #9d9388;
+    text-transform: uppercase;
+  }
+
+  .main-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(38px, 4.5vw, 62px);
+    font-weight: 400;
+    color: #b5a89a;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+  }
+
+  .main-title .italic {
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .main-title .bold {
+    font-weight: 700;
+  }
+
+  .description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.9;
+    color: #9d9388;
+    max-width: 520px;
+  }
+
+  /* ── CTA LINK ── */
+  .cta-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 12px;
+    text-decoration: none;
+    color: #9d9388;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+
+  .cta-link:hover {
+    color: #7a6f63;
+  }
+
+  .cta-link svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 1.5;
+  }
+
+  /* ── RIGHT IMAGE ── */
+  .right-image {
+    width: 100%;
+    max-width: 380px;
+    justify-self: start;
+  }
+
+  .right-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .container {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      text-align: center;
+    }
+
+    .left-image,
+    .right-image {
+      justify-self: center;
+    }
+
+    .description {
+      max-width: 100%;
+    }
+
+    .cta-link {
+      justify-content: center;
+    }
+  }
+
+  /* ── SECTION ── */
+  .collections-section {
+    padding: 80px 40px;
+    background: #e8e3dc;
+  }
+
+  /* ── HEADER ── */
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(157, 147, 136, 0.3);
+  }
+
+  .section-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 400;
+    color: #b5a89a;
+    letter-spacing: 0.08em;
+  }
+
+  .section-title .our {
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .all-link {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #9d9388;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease;
+  }
+
+  .all-link:hover {
+    color: #7a6f63;
+  }
+
+  /* ── CONTENT CONTAINER ── */
+  .content-wrapper {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  /* ── LEFT TEXT ── */
+  .left-text {
+    padding-top: 20px;
+  }
+
+  .discover-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    color: #9d9388;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.9;
+    color: #9d9388;
+  }
+
+  /* ── CAROUSEL CONTAINER ── */
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 24px;
+    transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
+  }
+
+  .carousel-slide {
+    min-width: 620px;
+    height: 580px;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── NAVIGATION DOTS ── */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(157, 147, 136, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .carousel-dot.active {
+    background: #9d9388;
+    transform: scale(1.3);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .content-wrapper {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .carousel-slide {
+      min-width: 90vw;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 1: YAZZEN CAROUSEL
+═══════════════════════════════════════════════════════════ -->
+
+<section class="carousel" id="carousel">
+
+  <!-- Slide 1 -->
+  <div class="slide active" id="slide-0">
+    <img class="slide-img"
+      src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1800&q=80&auto=format&fit=crop"
+      alt="Wedding couple in rain">
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide" id="slide-1">
+    <img class="slide-img"
+      src="https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?w=1800&q=80&auto=format&fit=crop"
+      alt="Wedding ceremony aisle">
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide" id="slide-2">
+    <img class="slide-img"
+      src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1800&q=80&auto=format&fit=crop"
+      alt="Couple portrait">
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide" id="slide-3">
+    <img class="slide-img"
+      src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1800&q=80&auto=format&fit=crop"
+      alt="Christening ceremony">
+  </div>
+
+  <!-- Static left -->
+  <div class="static-left">
+    <div class="capturing">Capturing</div>
+    <div class="tagline">15 Years of Smiles</div>
+    <div class="category">Wedding Photography</div>
+  </div>
+
+  <!-- Thin vertical rule -->
+  <div class="rule"></div>
+
+  <!-- Animated right text -->
+  <div class="right-text" id="right-text">
+    <div class="slide-label" id="slide-label">Precious &amp; Special</div>
+    <div class="slide-title" id="slide-title">christenings</div>
+  </div>
+
+  <!-- Progress dots -->
+  <div class="dots" id="dots">
+    <div class="dot active"><div class="dot-fill"></div></div>
+    <div class="dot"><div class="dot-fill"></div></div>
+    <div class="dot"><div class="dot-fill"></div></div>
+    <div class="dot"><div class="dot-fill"></div></div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 2: CHRISTINA HOHNER
+═══════════════════════════════════════════════════════════ -->
+
+<section class="christina-section">
+
+  <!-- NAV -->
+  <nav>
+    <div class="brand">Christina Hohner</div>
+    <div class="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- LAYOUT SECTION -->
+  <div class="layout-section">
+    <div class="layout">
+
+      <!-- ── LEFT ── -->
+
+      <!-- Large auto-rotating image (bottom left) -->
+      <div class="img-large" id="rotating-img">
+        <img
+          src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop"
+          alt="Wedding couple" class="visible">
+        <img
+          src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800&q=80&auto=format&fit=crop"
+          alt="Wedding garden">
+        <img
+          src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&q=80&auto=format&fit=crop"
+          alt="Wedding detail">
+      </div>
+
+      <!-- WEDDING italic -->
+      <div class="text-wedding">WEDDING</div>
+
+      <!-- Tall portrait (overlapping) -->
+      <img class="img-tall"
+        src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&q=80&auto=format&fit=crop&crop=top"
+        alt="Bride portrait">
+
+      <!-- Photography large text -->
+      <div class="text-photography">Photography</div>
+
+
+      <!-- ── RIGHT ── -->
+
+      <!-- Studio/branding portrait -->
+      <img class="img-studio"
+        src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=700&q=80&auto=format&fit=crop"
+        alt="Branding portrait">
+
+      <!-- BRANDING italic -->
+      <div class="text-branding">BRANDING</div>
+
+      <!-- Motion veil image -->
+      <img class="img-veil"
+        src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=700&q=80&auto=format&fit=crop&crop=top"
+        alt="Bridal veil motion">
+
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION 3: VISUAL STORIES
+═══════════════════════════════════════════════════════════ -->
+
+<section class="hero-section">
+  
+  <!-- Heading -->
+  <h1 class="heading">I create visual stories and digital experiences</h1>
+
+  <!-- Photo Stack -->
+  <div class="photo-container">
+    
+    <div class="photo-card">
+      <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=800&q=80&auto=format&fit=crop" alt="Photographer in greenhouse">
+    </div>
+
+    <div class="photo-card">
+      <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80&auto=format&fit=crop" alt="Portrait with camera">
+    </div>
+
+    <div class="photo-card">
+      <img src="https://images.unsplash.com/photo-1556139943-4bdca53adf1e?w=800&q=80&auto=format&fit=crop" alt="Behind the scenes">
+    </div>
+
+  </div>
+
+  <!-- Bio Text -->
+  <p class="bio-text">
+    I am a Vienna-based creative specializing in photography, video, development, 
+    design and social media. With a passion for storytelling, I bring a unique 
+    perspective to each project.
+  </p>
+
+</section>
+
+
+<section class="ethnos-section">
+  <div class="container">
+
+    <!-- LEFT IMAGE -->
+    <div class="left-image">
+      <img src="https://images.unsplash.com/photo-1594463750939-d9c7309f5f5c?w=900&q=80&auto=format&fit=crop" alt="Wedding dress detail">
+      <div class="image-overlay-text">LUCE+SPOSA<br>ATELIER</div>
+    </div>
+
+    <!-- CENTER CONTENT -->
+    <div class="center-content">
+      <div class="eyebrow">Our Ethnos</div>
+      
+      <h1 class="main-title">
+        THE PERFECTION<br>
+        <span class="italic">OF A UKRAINIAN BRAND</span><br>
+        <span class="bold">WEDDING DRESS</span>
+      </h1>
+
+      <p class="description">
+        LuceSposa is a Ukrainian brand of designer wedding dresses. The brand was created in 2016. Its name in Italian means bright bride. In this name, we put the main idea — to create bridal outfits that highlight the beauty, inner light, purity, and elegance of each bride. Outfits that make her feel confident, courageous, and desirable.
+      </p>
+
+      <a href="#story" class="cta-link">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 5v14M5 12h14" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Meet with our story
+      </a>
+    </div>
+
+    <!-- RIGHT IMAGE -->
+    <div class="right-image">
+      <img src="https://images.unsplash.com/photo-1522198684868-88edd8463fc9?w=800&q=80&auto=format&fit=crop" alt="Design team">
+    </div>
+
+  </div>
+</section>
+
+
+<section class="collections-section">
+  
+  <!-- HEADER -->
+  <div class="section-header">
+    <h2 class="section-title">
+      <span class="our">OUR</span> COLLECTIONS
+    </h2>
+    <a href="#all" class="all-link">All collections</a>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content-wrapper">
+    
+    <!-- LEFT TEXT -->
+    <div class="left-text">
+      <h3 class="discover-title">Discover our<br>Collections</h3>
+      <p class="description">
+        These collections is about the exceptional beauty of each and every woman. About a confident, self-sufficient, creative, and intelligent woman.
+      </p>
+    </div>
+
+    <!-- CAROUSEL -->
+    <div class="carousel-container">
+      <div class="carousel-track" id="carousel-track">
+        
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1594463750939-d9c7309f5f5c?w=1200&q=80&auto=format&fit=crop" alt="Wedding dress collection 1">
+        </div>
+
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1519657337289-077653f724ed?w=1200&q=80&auto=format&fit=crop" alt="Wedding dress collection 2">
+        </div>
+
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1200&q=80&auto=format&fit=crop" alt="Wedding dress collection 3">
+        </div>
+
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=1200&q=80&auto=format&fit=crop" alt="Wedding dress collection 4">
+        </div>
+
+      </div>
+
+      <!-- DOTS -->
+      <div class="carousel-dots" id="carousel-dots">
+        <div class="carousel-dot active" data-index="0"></div>
+        <div class="carousel-dot" data-index="1"></div>
+        <div class="carousel-dot" data-index="2"></div>
+        <div class="carousel-dot" data-index="3"></div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<script>
+  const track = document.getElementById('carousel-track');
+  const dots = document.querySelectorAll('.carousel-dot');
+  const slides = document.querySelectorAll('.carousel-slide');
+  
+  let currentIndex = 0;
+  let autoScroll = null;
+  let isScrolling = false;
+
+  function goToSlide(index) {
+    if (isScrolling) return;
+    isScrolling = true;
+
+    currentIndex = index;
+    const slideWidth = slides[0].offsetWidth + 24; // slide width + gap
+    track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+
+    // Update dots
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+
+    setTimeout(() => {
+      isScrolling = false;
+    }, 600);
+  }
+
+  function nextSlide() {
+    const nextIndex = (currentIndex + 1) % slides.length;
+    goToSlide(nextIndex);
+  }
+
+  function startAutoScroll() {
+    stopAutoScroll();
+    autoScroll = setInterval(nextSlide, 4000);
+  }
+
+  function stopAutoScroll() {
+    if (autoScroll) {
+      clearInterval(autoScroll);
+      autoScroll = null;
+    }
+  }
+
+  // Dot click handlers
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      stopAutoScroll();
+      goToSlide(index);
+      startAutoScroll();
+    });
+  });
+
+  // Intersection Observer to start carousel when scrolled into view
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        startAutoScroll();
+      } else {
+        stopAutoScroll();
+      }
+    });
+  }, {
+    threshold: 0.3
+  });
+
+  observer.observe(track);
+
+  // Touch swipe support
+  let startX = 0;
+  let isDragging = false;
+
+  track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+    stopAutoScroll();
+  });
+
+  track.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+  });
+
+  track.addEventListener('touchend', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    
+    const endX = e.changedTouches[0].clientX;
+    const diff = startX - endX;
+
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        // Swipe left
+        goToSlide((currentIndex + 1) % slides.length);
+      } else {
+        // Swipe right
+        goToSlide((currentIndex - 1 + slides.length) % slides.length);
+      }
+    }
+    
+    startAutoScroll();
+  });
+</script>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════════ -->
+
+<script>
+  // ── CAROUSEL FUNCTIONALITY ──
+  const slides = [
+    { label: 'Precious & Special',   title: 'christenings'   },
+    { label: 'Once in a Lifetime',   title: 'weddings'       },
+    { label: 'Every Smile Matters',  title: 'portraits'      },
+    { label: 'Joy Unscripted',        title: 'celebrations'  },
+  ];
+
+  const DURATION = 5000;
+  let current = 0;
+  let autoTimer = null;
+
+  const slideEls  = document.querySelectorAll('.slide');
+  const dotEls    = document.querySelectorAll('.dot');
+  const rightText = document.getElementById('right-text');
+  const labelEl   = document.getElementById('slide-label');
+  const titleEl   = document.getElementById('slide-title');
+
+  function goTo(idx) {
+    // Exit current text
+    rightText.classList.remove('text-visible');
+    rightText.classList.add('text-exit');
+
+    // Remove active slide/dot
+    slideEls[current].classList.remove('active');
+    dotEls[current].classList.remove('active');
+    dotEls[current].querySelector('.dot-fill').style.animation = 'none';
+
+    current = (idx + slides.length) % slides.length;
+
+    // Activate new slide
+    slideEls[current].classList.add('active');
+    dotEls[current].classList.add('active');
+
+    // Re-trigger dot animation (force reflow)
+    const fill = dotEls[current].querySelector('.dot-fill');
+    fill.style.animation = 'none';
+    void fill.offsetWidth;
+    fill.style.animation = '';
+
+    // After exit transition, swap text and re-enter
+    setTimeout(() => {
+      rightText.classList.remove('text-exit');
+      labelEl.textContent = slides[current].label;
+      titleEl.textContent = slides[current].title;
+      // Small frame delay then trigger enter
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          rightText.classList.add('text-visible');
+        });
+      });
+    }, 520);
+  }
+
+  function startAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo(current + 1), DURATION);
+  }
+
+  // Dot click
+  dotEls.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      if (i === current) return;
+      clearInterval(autoTimer);
+      goTo(i);
+      startAuto();
+    });
+  });
+
+  // Init first text
+  setTimeout(() => rightText.classList.add('text-visible'), 100);
+  startAuto();
+
+  // ── CHRISTINA SECTION: ROTATING IMAGE ──
+  const imgs = document.querySelectorAll('#rotating-img img');
+  let currentImg = 0;
+
+  setInterval(() => {
+    imgs[currentImg].classList.remove('visible');
+    currentImg = (currentImg + 1) % imgs.length;
+    imgs[currentImg].classList.add('visible');
+  }, 3000);
+</script>
+
+</body>
+</html>

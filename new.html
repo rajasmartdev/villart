@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Yazzen Photography</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@200;300;400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* ================================
+   HERO CAROUSEL (FIRST SECTION)
+================================ */
+
+.hero {
+  background:#111;
+  height:100vh;
+  overflow:hidden;
+  position:relative;
+  font-family:'Raleway', sans-serif;
+}
+
+.slide {
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity 1.2s ease;
+}
+
+.slide.active { opacity:1; }
+
+.slide img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(0.5) grayscale(100%);
+  transform:scale(1.05);
+  transition:transform 6s ease;
+}
+
+.slide.active img { transform:scale(1); }
+
+.static-left {
+  position:absolute;
+  left:40px;
+  bottom:160px;
+  z-index:10;
+  color:#fff;
+}
+
+.static-left h1 {
+  font-family:'Cormorant Garamond', serif;
+  font-size:90px;
+  font-weight:300;
+  font-style:italic;
+}
+
+.static-left p {
+  margin-top:20px;
+  font-size:12px;
+  letter-spacing:3px;
+  opacity:0.7;
+  text-transform:uppercase;
+}
+
+/* ================================
+   SECOND SECTION (WHITE LAYOUT)
+================================ */
+
+.content-section {
+  background:#fff;
+  padding:80px 0;
+  font-family:'Playfair Display', serif;
+}
+
+nav {
+  display:flex;
+  justify-content:center;
+  padding:30px 0;
+}
+
+.brand {
+  font-size:22px;
+  letter-spacing:4px;
+}
+
+.layout {
+  position:relative;
+  max-width:1400px;
+  height:700px;
+  margin:0 auto;
+}
+
+.img-large {
+  position:absolute;
+  left:20px;
+  bottom:0;
+  width:300px;
+  height:490px;
+  overflow:hidden;
+}
+
+.img-large img {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:opacity 1s ease;
+}
+
+.img-large img.visible { opacity:1; }
+
+.text-wedding {
+  position:absolute;
+  left:60px;
+  top:60px;
+  font-style:italic;
+  font-weight:900;
+  font-size:70px;
+}
+
+.img-tall {
+  position:absolute;
+  left:240px;
+  top:20px;
+  width:230px;
+  height:400px;
+  object-fit:cover;
+}
+
+.text-photography {
+  position:absolute;
+  left:220px;
+  bottom:-10px;
+  font-size:100px;
+  font-weight:900;
+}
+
+.img-studio {
+  position:absolute;
+  right:360px;
+  top:0;
+  width:270px;
+  height:380px;
+  object-fit:cover;
+}
+
+.text-branding {
+  position:absolute;
+  right:20px;
+  top:180px;
+  font-size:70px;
+  font-style:italic;
+  font-weight:900;
+}
+
+.img-veil {
+  position:absolute;
+  right:20px;
+  bottom:60px;
+  width:260px;
+  height:310px;
+  object-fit:cover;
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero">
+
+  <div class="slide active">
+    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1800&q=80&auto=format&fit=crop">
+  </div>
+
+  <div class="slide">
+    <img src="https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?w=1800&q=80&auto=format&fit=crop">
+  </div>
+
+  <div class="slide">
+    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1800&q=80&auto=format&fit=crop">
+  </div>
+
+  <div class="static-left">
+    <h1>Capturing</h1>
+    <p>15 Years of Smiles</p>
+  </div>
+
+</section>
+
+
+<!-- ================= SECOND SECTION ================= -->
+
+<section class="content-section">
+
+<nav>
+  <div class="brand">Christina Hohner</div>
+</nav>
+
+<div class="layout">
+
+  <div class="img-large" id="rotating-img">
+    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80&auto=format&fit=crop" class="visible">
+    <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=800&q=80&auto=format&fit=crop">
+    <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800&q=80&auto=format&fit=crop">
+  </div>
+
+  <div class="text-wedding">WEDDING</div>
+
+  <img class="img-tall"
+  src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&q=80&auto=format&fit=crop&crop=top">
+
+  <div class="text-photography">Photography</div>
+
+  <img class="img-studio"
+  src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=700&q=80&auto=format&fit=crop">
+
+  <div class="text-branding">BRANDING</div>
+
+  <img class="img-veil"
+  src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=700&q=80&auto=format&fit=crop&crop=top">
+
+</div>
+
+</section>
+
+
+<script>
+/* HERO SLIDER */
+const heroSlides = document.querySelectorAll('.hero .slide');
+let heroIndex = 0;
+
+setInterval(() => {
+  heroSlides[heroIndex].classList.remove('active');
+  heroIndex = (heroIndex + 1) % heroSlides.length;
+  heroSlides[heroIndex].classList.add('active');
+}, 5000);
+
+
+/* ROTATING IMAGE (SECOND SECTION) */
+const imgs = document.querySelectorAll('#rotating-img img');
+let current = 0;
+
+setInterval(() => {
+  imgs[current].classList.remove('visible');
+  current = (current + 1) % imgs.length;
+  imgs[current].classList.add('visible');
+}, 3000);
+</script>
+
+</body>
+</html>
