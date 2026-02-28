@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | VILLART Photography</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Italiana&family=Pinyon+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">VILLART</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portfolio.html">Portfolios</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <div class="menu-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </nav>
+    
+    <!-- Shutter Animation Overlay -->
+    <div class="shutter-container" id="shutter">
+      <div class="shutter-blade top-left"></div>
+      <div class="shutter-blade top-right"></div>
+      <div class="shutter-blade bottom-left"></div>
+      <div class="shutter-blade bottom-right"></div>
+      <div class="shutter-center">
+        <div class="aperture"></div>
+      </div>
+    </div>
+
+    <!-- Camera Flash Overlay -->
+    <div id="camera-flash"></div>
+
+    <!-- Page Header -->
+    <section class="page-hero" style="background-image: url('images/falaknama palaca.jpg');">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h1>Get In Touch</h1>
+            <p>Let's Create Magic Together</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="contact-page-section">
+        <div class="container contact-wrapper">
+            <!-- Contact Info -->
+            <div class="contact-info-panel">
+                <h2 class="section-title">Visit Us</h2>
+                <div class="info-item">
+                    <h4>Studio</h4>
+                    <p><br>Hyderabad, Telangana 500034</p>
+                </div>
+                <div class="info-item">
+                    <h4>Contact</h4>
+                    <p>Phone: +91 98765 43210<br>Email: hello@villart.in</p>
+                </div>
+                <div class="info-item">
+                    <h4>Hours</h4>
+                    <p>Mon - Sat: 10:00 AM - 7:00 PM<br>Sunday: By Appointment</p>
+                </div>
+                <div class="social-connect">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                         <a href="#">IG</a>
+                         <a href="#">FB</a>
+                         <a href="#">YT</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-panel">
+                <h2 class="section-title">Inquire Now</h2>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <input type="text" id="name" required>
+                            <label for="name">Your Name</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="tel" id="mobile" required>
+                            <label for="mobile">Mobile Number</label>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="email" required>
+                        <label for="email">Your Email</label>
+                    </div>
+                    <div class="form-row">
+                         <div class="input-group">
+                            <input type="text" id="date">
+                            <label for="date">Event Date (Optional)</label>
+                        </div>
+                         <div class="input-group">
+                            <input type="text" id="location">
+                            <label for="location">Event Location</label>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="message" required></textarea>
+                        <label for="message">Tell us about your vision...</label>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                        <span>Send Inquiry</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Polaroid Thank You Popup (Re-used) -->
+    <div id="thankyou-popup" class="polaroid-popup">
+        <div class="polaroid-frame">
+            <span class="close-popup">&times;</span>
+            <div class="polaroid-inner details-mode">
+                <div class="submitted-details">
+                    <p><strong>Name:</strong> <span id="pop-name"></span></p>
+                    <p><strong>Email:</strong> <span id="pop-email"></span></p>
+                    <p><strong>Mobile:</strong> <span id="pop-mobile"></span></p>
+                    <p><strong>Vision:</strong> <span id="pop-message"></span></p>
+                </div>
+                <div class="developing-overlay"></div>
+            </div>
+            <div class="polaroid-caption">
+                <h3>Inquiry Sent</h3>
+                <p>We'll get back to you shortly.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 VILLART Photography. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Behance</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VILLART | Premium Photography</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Josefin+Sans:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Shutter Animation Overlay -->
+    <div class="shutter-container" id="shutter">
+      <div class="shutter-blade top-left"></div>
+      <div class="shutter-blade top-right"></div>
+      <div class="shutter-blade bottom-left"></div>
+      <div class="shutter-blade bottom-right"></div>
+      <div class="shutter-center">
+        <div class="aperture"></div>
+      </div>
+    </div>
+    
+    <!-- Camera Flash Overlay -->
+    <div id="camera-flash"></div>
+
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">VILLART</div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="portfolio.html">Portfolios</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="menu-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+      <div class="hero-slideshow">
+        <!-- Slide 1 -->
+        <div class="hero-slide active">
+            <div class="slide-bg" style="background-image: url('images/choose-4.jpg')"></div>
+            <div class="slide-caption">
+                <h3>The Royal Union</h3>
+                <p>Where Love Meets Legacy</p>
+            </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="hero-slide">
+             <div class="slide-bg" style="background-image: url('images/560542513_18385399624181553_1336539889338774350_n.jpg')"></div>
+             <div class="slide-caption">
+                <h3>Timeless Traditions</h3>
+                <p>Every Ritual, A Masterpiece</p>
+            </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="hero-slide">
+             <div class="slide-bg" style="background-image: url('images/534590671_18421486624101213_3160708559675378795_n..jpg')"></div>
+             <div class="slide-caption">
+                <h3>Eternal Moments</h3>
+                <p>Captured for Generations</p>
+            </div>
+        </div>
+      </div>
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span class="reveal-text">VILLART</span>
+        </h1>
+        <p class="hero-subtitle">Production House</p>
+        <p class="hero-tagline">Documenting Opulent Indian Weddings Since 1990</p>
+        <button class="cta-btn" id="exploreBtn">View Masterpieces</button>
+      </div>
+      <div class="scroll-indicator">
+        <div class="mouse">
+          <div class="wheel"></div>
+        </div>
+        <div class="arrow"></div>
+      </div>
+    </section>
+
+    <!-- Villart Masterpieces (Gallery) -->
+    <section id="gallery" class="gallery-section">
+      <div class="section-header">
+        <h2>Villart Masterpieces</h2>
+        <p class="section-subtitle">A collection of opulent memories</p>
+      </div>
+      
+      <div class="gallery-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="wedding">The Big Day</button>
+        <button class="filter-btn" data-filter="pre-wedding">Pre-Wedding</button>
+        <button class="filter-btn" data-filter="haldi">Haldi & Mehendi</button>
+      </div>
+
+      <div class="masonry-grid">
+        <!-- Item 1 -->
+        <div class="masonry-item" data-category="wedding">
+          <img src="images/298809936_1218389498701535_5825423761768576841_n..jpg" alt="Royal Wedding">
+          <div class="item-overlay">
+            <h4>Royal Union</h4>
+          </div>
+        </div>
+        <!-- Item 2 -->
+        <div class="masonry-item portrait" data-category="pre-wedding">
+          <img src="images/560542513_18385399624181553_1336539889338774350_n.jpg" alt="Pre-Wedding">
+          <div class="item-overlay">
+            <h4>Timeless Love</h4>
+          </div>
+        </div>
+        <!-- Item 3 -->
+        <div class="masonry-item" data-category="haldi">
+          <img src="images/choose-4.jpg" alt="Haldi Joy">
+          <div class="item-overlay">
+            <h4>Haldi Joy</h4>
+          </div>
+        </div>
+        <!-- Item 4 -->
+        <div class="masonry-item" data-category="wedding">
+          <img src="images/bride.jpg" alt="The Bride">
+          <div class="item-overlay">
+            <h4>The Bride</h4>
+          </div>
+        </div>
+        <!-- Item 5 -->
+        <div class="masonry-item" data-category="pre-wedding">
+          <img src="images/381182102_304511885611682_9140619120440877140_n..jpg" alt="Goa Sunset">
+          <div class="item-overlay">
+            <h4>Goa Sunset</h4>
+          </div>
+        </div>
+        <!-- Item 6 -->
+        <div class="masonry-item portrait" data-category="wedding">
+          <img src="images/danceing.jpg" alt="Sangeet Dance">
+          <div class="item-overlay">
+            <h4>Sangeet Night</h4>
+          </div>
+        </div>
+        <!-- Item 7 -->
+        <div class="masonry-item" data-category="wedding">
+          <img src="images/falaknama palaca.jpg" alt="Falaknuma Palace">
+          <div class="item-overlay">
+            <h4>Royal Venue</h4>
+          </div>
+        </div>
+        <!-- Item 8 -->
+        <div class="masonry-item" data-category="haldi">
+          <img src="images/haldi.jpg" alt="Turmeric Glow">
+          <div class="item-overlay">
+            <h4>Turmeric Glow</h4>
+          </div>
+        </div>
+        <!-- Item 9 -->
+        <div class="masonry-item" data-category="pre-wedding">
+          <img src="images/lake.jpg" alt="Lake Romance">
+          <div class="item-overlay">
+            <h4>Lake Romance</h4>
+          </div>
+        </div>
+        <!-- Item 10 -->
+        <div class="masonry-item" data-category="wedding">
+          <img src="images/380748951_284188131081848_8273531264612274183_n.jpg" alt="Golden Hour">
+          <div class="item-overlay">
+            <h4>Golden Hour</h4>
+          </div>
+        </div>
+        <!-- Item 11 -->
+        <div class="masonry-item portrait" data-category="haldi">
+          <img src="images/573477342_18388990447181553_3273664846797173142_n..jpg" alt="Haldi Celebration">
+          <div class="item-overlay">
+            <h4>Celebration</h4>
+          </div>
+        </div>
+        <!-- Item 12 -->
+        <div class="masonry-item" data-category="wedding">
+          <img src="images/323179378_714459396650106_733436599180110455_n..jpg" alt="The Vow">
+          <div class="item-overlay">
+            <h4>The Vow</h4>
+          </div>
+        </div>
+        <!-- Item 13 -->
+        <div class="masonry-item" data-category="wedding">
+          <img src="images/462660720_1253796969369803_4690794799303450226_n..jpg" alt="Mandap Details">
+          <div class="item-overlay">
+            <h4>Mandap Details</h4>
+          </div>
+        </div>
+        <!-- Item 14 -->
+        <div class="masonry-item" data-category="haldi">
+          <img src="images/462697824_858142433121612_2114814869817494720_n..jpg" alt="Rituals">
+          <div class="item-overlay">
+            <h4>Rituals</h4>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <!-- Load More Button -->
+      <div class="load-more-container">
+          <button id="loadMoreBtn" class="load-more-btn">
+              <span class="circle-icon">+</span>
+              <span class="text">Discover More</span>
+          </button>
+      </div>
+    </section>
+
+    <!-- The Royal Journey (Pre-Wedding Cinematic Scroll) -->
+    <!-- Re-using film-strip aesthetic but renamed -->
+    <section id="journey" class="process-filmstrip">
+        <div class="section-header">
+            <h2>The Royal Journey</h2>
+            <div class="film-strip-track">
+                <div class="film-frame">
+                    <span class="frame-number">01</span>
+                    <div class="frame-image"><img src="images/couple -goa.jpg" alt="The Proposal"></div>
+                    <div class="frame-content">
+                        <h3>The Beginning</h3>
+                        <p>Capturing the spark where it all started.</p>
+                    </div>
+                </div>
+                <!-- Connector graphic CSS -->
+                <div class="film-frame inverted">
+                    <span class="frame-number">02</span>
+                    <div class="frame-image"><img src="images/danceing.jpg" alt="Sangeet"></div>
+                    <div class="frame-content">
+                        <h3>The Celebration</h3>
+                        <p>Music, dance, and the colors of Sangeet.</p>
+                    </div>
+                </div>
+                <div class="film-frame">
+                    <span class="frame-number">03</span>
+                    <div class="frame-image"><img src="images/331294421_957926028458520_2419969326987510883_n.jpg" alt="The Wedding"></div>
+                    <div class="frame-content">
+                        <h3>The Union</h3>
+                        <p>The timeless moment of promises.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section: The Villart Legacy -->
+    <section id="about" class="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>The Villart Legacy</h2>
+                <p>Since 1990, Villart Production House has been the silent observer of India's most opulent unions. We don't just capture photos; we document history, tradition, and the raw emotion of families coming together.</p>
+                <p>From the grandeur of the Ambani weddings to the intimacy of destination vows, our lens has seen it all. We craft visual heirlooms for generations to cherish.</p>
+            </div>
+            <div class="about-image">
+                <img src="images/bride.jpg" alt="The Villart Team">
+            </div>
+        </div>
+    </section>
+
+    <!-- Cinematic Teaser (Video Preview) -->
+    <section class="cinematic-teaser">
+        <div class="video-overlay">
+            <div class="play-button">
+                <span>&#9658;</span>
+            </div>
+            <h2>The Villart Film</h2>
+            <p>Experience the emotion in motion</p>
+        </div>
+        <div class="video-bg-placeholder">
+            <!-- Static image acting as video cover -->
+            <img src="images/560542513_18385399624181553_1336539889338774350_n.jpg" alt="Cinematic Wedding Film">
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div class="caption"></div>
+    </div>
+
+    <!-- The Royal Collection (Services) -->
+    <section id="services" class="services-reveal">
+        <div class="service-item" style="--bg-url: url('images/380748951_284188131081848_8273531264612274183_n.jpg')">
+            <h3 class="service-title">The Wedding</h3>
+            <span class="service-meta">Traditional / Candid / Rituals</span>
+            <div class="service-overlay"></div>
+        </div>
+        <div class="service-item" style="--bg-url: url('images/560542513_18385399624181553_1336539889338774350_n.jpg')">
+            <h3 class="service-title">Cinematic Film</h3>
+            <span class="service-meta">4K Trailers / Reels / Documentary</span>
+            <div class="service-overlay"></div>
+        </div>
+        <div class="service-item" style="--bg-url: url('images/lake.jpg')">
+            <h3 class="service-title">Pre-Wedding</h3>
+            <span class="service-meta">Conceptual / Destination / Stylized</span>
+            <div class="service-overlay"></div>
+        </div>
+    </section>
+
+    <!-- Destinations (Luxury Venues) -->
+    <section id="destinations" class="destinations">
+        <div class="section-header">
+            <h2>Iconic Destinations</h2>
+            <p class="section-subtitle">From Royal Palaces to Beachside Vows</p>
+        </div>
+        <div class="destination-scroll">
+            <div class="destination-card">
+                <img src="images/falaknama palaca.jpg" alt="Falaknuma">
+                <div class="dest-info">
+                    <h3>Falaknuma</h3>
+                    <span>Royal Palace</span>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="images/couple -goa.jpg" alt="Goa">
+                <div class="dest-info">
+                    <h3>Goa</h3>
+                    <span>Beach Weddings</span>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="images/lake.jpg" alt="Udaipur">
+                <div class="dest-info">
+                    <h3>Udaipur</h3>
+                    <span>City of Lakes</span>
+                </div>
+            </div>
+            <div class="destination-card">
+                <img src="images/bride.jpg" alt="Jaipur">
+                <div class="dest-info">
+                    <h3>Jaipur</h3>
+                    <span>The Pink City</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Quote Divider -->
+    <section class="cinematic-quote">
+        <div class="quote-text">
+            <span>"In India, a wedding is not just an event. It is a festival of emotions."</span>
+            <cite>— Villart Philosophy</cite>
+        </div>
+    </section>
+
+    <!-- Client Love (Testimonials) -->
+    <section class="testimonial-editorial">
+        <div class="editorial-image">
+            <img src="images/573477342_18388990447181553_3273664846797173142_n..jpg" alt="Happy Couple">
+        </div>
+        <div class="editorial-content">
+            <blockquote>"Villart didn't just take photos. They made us feel like royalty. Every frame looks like a scene from a blockbluster movie."</blockquote>
+            <cite>Deepika & Ranveer</cite>
+            <div class="signature">Villart Muse</div>
+        </div>
+    </section>
+
+    <!-- As Seen In (Press Credentials) -->
+    <section class="press-section">
+        <p>Featured In</p>
+        <div class="press-logos">
+            <span>VOGUE</span>
+            <span>Harper's BAZAAR</span>
+            <span>ELLE</span>
+            <span>WED ME GOOD</span>
+            <span>Femina</span>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <h2>Get In Focus</h2>
+            <p>Ready to capture your moments? Let's discuss your vision.</p>
+            <form class="contact-form" id="contactForm">
+                <div class="input-group">
+                    <input type="text" id="name" required>
+                    <label for="name">Your Name</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" required>
+                    <label for="email">Your Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="tel" id="mobile" required>
+                    <label for="mobile">Mobile Number</label>
+                </div>
+                <div class="input-group">
+                    <textarea id="message" required></textarea>
+                    <label for="message">Your Vision</label>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                    <span>Capture Your Vision</span>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Polaroid Thank You Popup -->
+    <div id="thankyou-popup" class="polaroid-popup">
+        <div class="polaroid-frame">
+            <span class="close-popup">&times;</span>
+            <div class="polaroid-inner details-mode">
+                <div class="submitted-details">
+                    <p><strong>Name:</strong> <span id="pop-name"></span></p>
+                    <p><strong>Email:</strong> <span id="pop-email"></span></p>
+                    <p><strong>Mobile:</strong> <span id="pop-mobile"></span></p>
+                    <p><strong>Vision:</strong> <span id="pop-message"></span></p>
+                </div>
+                <!-- Artistic overlay for texture -->
+                <div class="developing-overlay"></div>
+            </div>
+            <div class="polaroid-caption">
+                <h3>Request Received</h3>
+                <p>We'll be in touch soon.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 LUMINA Photography. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Behance</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

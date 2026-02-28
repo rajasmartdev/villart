@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio | VILLART Photography</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Italiana&family=Pinyon+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">VILLART</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portfolio.html" class="active">Portfolios</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="menu-toggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </nav>
+    
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div class="caption"></div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-hero" style="background-image: url('images/573477342_18388990447181553_3273664846797173142_n..jpg');">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h1>Our Masterpieces</h1>
+            <p>A Curated Collection of Love Stories</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+      <div class="gallery-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="wedding">The Big Day</button>
+        <button class="filter-btn" data-filter="pre-wedding">Pre-Wedding</button>
+        <button class="filter-btn" data-filter="haldi">Haldi & Mehendi</button>
+      </div>
+
+      <div class="masonry-grid">
+         <!-- Item 1 -->
+         <div class="masonry-item" data-category="wedding">
+            <img src="images/331294421_957926028458520_2419969326987510883_n.jpg" alt="Royal Wedding">
+            <div class="item-overlay">
+              <h4>Royal Union</h4>
+            </div>
+          </div>
+          <!-- Item 2 -->
+          <div class="masonry-item portrait" data-category="pre-wedding">
+            <img src="images/560542513_18385399624181553_1336539889338774350_n.jpg" alt="Pre-Wedding">
+            <div class="item-overlay">
+              <h4>Timeless Love</h4>
+            </div>
+          </div>
+          <!-- Item 3 -->
+          <div class="masonry-item" data-category="haldi">
+            <img src="images/choose-4.jpg" alt="Haldi Joy">
+            <div class="item-overlay">
+              <h4>Haldi Joy</h4>
+            </div>
+          </div>
+          <!-- Item 4 -->
+          <div class="masonry-item" data-category="wedding">
+            <img src="images/462660720_1253796969369803_4690794799303450226_n..jpg" alt="The Bride">
+            <div class="item-overlay">
+              <h4>The Bride Details</h4>
+            </div>
+          </div>
+          <!-- Item 5 -->
+          <div class="masonry-item" data-category="pre-wedding">
+            <img src="images/couple -goa.jpg" alt="Goa Sunset">
+            <div class="item-overlay">
+              <h4>Goa Sunset</h4>
+            </div>
+          </div>
+          <!-- Item 6 -->
+          <div class="masonry-item portrait" data-category="wedding">
+            <img src="images/danceing.jpg" alt="Sangeet Dance">
+            <div class="item-overlay">
+              <h4>Sangeet Night</h4>
+            </div>
+          </div>
+          <!-- Item 7 -->
+          <div class="masonry-item" data-category="wedding">
+            <img src="images/falaknama palaca.jpg" alt="Falaknuma Palace">
+            <div class="item-overlay">
+              <h4>Royal Venue</h4>
+            </div>
+          </div>
+          <!-- Item 8 -->
+          <div class="masonry-item" data-category="haldi">
+            <img src="images/haldi.jpg" alt="Turmeric Glow">
+            <div class="item-overlay">
+              <h4>Turmeric Glow</h4>
+            </div>
+          </div>
+          <!-- Item 9 -->
+          <div class="masonry-item" data-category="pre-wedding">
+            <img src="images/lake.jpg" alt="Lake Romance">
+            <div class="item-overlay">
+              <h4>Lake Romance</h4>
+            </div>
+          </div>
+          <!-- Item 10 -->
+          <div class="masonry-item" data-category="wedding">
+            <img src="images/380748951_284188131081848_8273531264612274183_n.jpg" alt="Golden Hour">
+            <div class="item-overlay">
+              <h4>Golden Hour</h4>
+            </div>
+          </div>
+          <!-- Item 11 -->
+          <div class="masonry-item portrait" data-category="haldi">
+            <img src="images/573477342_18388990447181553_3273664846797173142_n..jpg" alt="Haldi Celebration">
+            <div class="item-overlay">
+              <h4>Celebration</h4>
+            </div>
+          </div>
+          <!-- Item 12 -->
+          <div class="masonry-item" data-category="wedding">
+            <img src="images/323179378_714459396650106_733436599180110455_n..jpg" alt="The Vow">
+            <div class="item-overlay">
+              <h4>The Vow</h4>
+            </div>
+          </div>
+          <!-- Item 13 -->
+          <div class="masonry-item" data-category="wedding">
+            <img src="images/462660720_1253796969369803_4690794799303450226_n..jpg" alt="Mandap Details">
+            <div class="item-overlay">
+              <h4>Mandap Details</h4>
+            </div>
+          </div>
+          <!-- Item 14 -->
+          <div class="masonry-item" data-category="haldi">
+            <img src="images/462697824_858142433121612_2114814869817494720_n..jpg" alt="Rituals">
+            <div class="item-overlay">
+              <h4>Rituals</h4>
+            </div>
+          </div>
+          <!-- Item 15 (New) -->
+          <div class="masonry-item" data-category="wedding">
+            <img src="images/534590671_18421486624101213_3160708559675378795_n..jpg" alt="Elegance">
+            <div class="item-overlay">
+              <h4>Elegance</h4>
+            </div>
+          </div>
+          <!-- Item 16 (New) -->
+           <div class="masonry-item" data-category="pre-wedding">
+            <img src="images/381182102_304511885611682_9140619120440877140_n..jpg" alt="Vintage Love">
+            <div class="item-overlay">
+              <h4>Vintage Love</h4>
+            </div>
+          </div>
+      </div>
+
+      <!-- Load More Button -->
+      <div class="load-more-container">
+          <button id="loadMoreBtn" class="load-more-btn">
+              <span class="circle-icon">+</span>
+              <span class="text">Discover More</span>
+          </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 VILLART Photography. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Behance</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
